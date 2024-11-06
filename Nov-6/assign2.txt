@@ -1,0 +1,16 @@
+The spread operator is like a shortcut that allows us to easily work with arrays, objects, and even function arguments.
+
+Such as:
+
+1. In terms of Merging arrays or objects:
+    
+    const arr1 = [1, 2];
+    const arr2 = [3, 4];
+    const mergedArr = [...arr1, ...arr2];
+    console.log(copyArr);
+
+2. In terms of Copying arrays or objects:
+
+    const arr = [1, 2, 3];
+    const copyArr = [...arr];
+    console.log(copyArr);

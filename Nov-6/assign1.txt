@@ -1,0 +1,10 @@
+The map() method in JavaScript is a really handy way to loop through an array and create a new array based on each element.
+Think of it like saying, 'For every item in this list, apply a certain operation and give me back a new list with those results.'
+
+Example:
+
+const numbers = [1, 2, 3, 4];
+const doubled = numbers.map(num => num * 2);
+console.log(doubled);
+
+output: [2, 4, 6, 8]

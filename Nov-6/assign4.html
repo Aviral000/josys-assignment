@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Programming -- Array Of Objects</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        h2 {
+            text-align: center;
+        }
+        #data-table {
+            margin: 20px auto;
+            width: 80%;
+            border-collapse: collapse;
+            text-align: center;
+        }
+        #data-table th, #data-table td {
+            padding: 10px;
+            border: 1px solid #000;
+        }
+        #data-table th {
+            background-color: #f2f2f2;
+        }
+        button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+<h2>JavaScript Programming -- Array Of Objects</h2>
+<button onclick="displayData()">Get Data</button>
+
+<table id="data-table">
+    <thead>
+        <tr>
+            <th>Student Id</th>
+            <th>Student Name</th>
+            <th>Skill Set</th>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+<script>
+    //constant data(manually written data)
+    const students = [
+        { id: 454545, name: "Swapna", skill: "Angular" },
+        { id: 454546, name: "Eram", skill: "React" },
+        { id: 454547, name: "Manika", skill: "Node JS" },
+        { id: 454548, name: "Riya", skill: "HTML5" },
+        { id: 454549, name: "Vasundara", skill: "Angular" }
+    ];
+
+    //to perform action on a button
+    function displayData() {
+        //search via id
+        const tableBody = document.querySelector("#data-table tbody");
+        tableBody.innerHTML = "";
+
+        //iterating over each element in students array
+        students.forEach(student => {
+            //create a row
+            const row = document.createElement("tr");
+
+            //create a 3 column
+            //writing the text in the column
+            //now adding column and text into row
+            const idCell = document.createElement("td");
+            idCell.textContent = student.id;
+            row.appendChild(idCell);
+
+            const nameCell = document.createElement("td");
+            nameCell.textContent = student.name;
+            row.appendChild(nameCell);
+
+            const skillCell = document.createElement("td");
+            skillCell.textContent = student.skill;
+            row.appendChild(skillCell);
+
+            tableBody.appendChild(row);
+        });
+    }
+</script>
+
+</body>
+</html>
