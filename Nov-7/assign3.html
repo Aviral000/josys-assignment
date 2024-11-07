@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Operations</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f5f5f5;
+        }
+
+        .calculator-container {
+            width: 300px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .calculator-container h2 {
+            margin-bottom: 20px;
+        }
+
+        .calculator-container input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .calculator-container button {
+            width: 70px;
+            padding: 10px;
+            margin: 5px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            color: white;
+        }
+
+        .calculator-container button.add { background-color: #4CAF50; }
+        .calculator-container button.sub { background-color: #f44336; }
+        .calculator-container button.mul { background-color: #2196F3; }
+        .calculator-container button.div { background-color: #FF9800; }
+
+        .calculator-container button:hover {
+            opacity: 0.9;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="calculator-container">
+        <h2>Math Operations</h2>
+
+        <input type="number" id="num1" placeholder="Enter first number">
+        <input type="number" id="num2" placeholder="Enter second number">
+
+        <div>
+            <button class="add" onclick="calculate('add')">Add</button>
+            <button class="sub" onclick="calculate('sub')">Sub</button>
+            <button class="mul" onclick="calculate('mul')">Mul</button>
+            <button class="div" onclick="calculate('div')">Div</button>
+        </div>
+
+        <p id="result" class="result"></p>
+    </div>
+
+    <script>
+        function calculate(operation) {
+            // Get input values
+            const num1 = parseFloat(document.getElementById("num1").value);
+            const num2 = parseFloat(document.getElementById("num2").value);
+            const resultElement = document.getElementById("result");
+
+            // Validate inputs
+            if (isNaN(num1) || isNaN(num2)) {
+                resultElement.textContent = "Please enter valid numbers.";
+                resultElement.style.color = "red";
+                return;
+            }
+
+            //simple switch condition for add, sub, mul, div
+            let result;
+            switch (operation) {
+                case 'add':
+                    result = num1 + num2;
+                    break;
+                case 'sub':
+                    result = num1 - num2;
+                    break;
+                case 'mul':
+                    result = num1 * num2;
+                    break;
+                case 'div':
+                    if (num2 === 0) {
+                        resultElement.textContent = "Cannot divide by zero.";
+                        resultElement.style.color = "red";
+                        return;
+                    }
+                    result = num1 / num2;
+                    break;
+                default:
+                    result = "Invalid operation";
+            }
+
+            // Display the result in green
+            resultElement.textContent = "Result: " + result;
+            resultElement.style.color = "green";
+        }
+    </script>
+
+</body>
+</html>
