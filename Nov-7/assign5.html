@@ -114,7 +114,7 @@
                 removeBtn.textContent = "Remove";
                 removeBtn.classList.add('remove-btn');
                 removeBtn.onclick = function () {
-                    table.deleteRow(index+1); // Remove the row when clicked with index + 1 because index start from 0 where cell start from 1
+                    table.deleteRow(row.rowIndex); // Remove the row when clicked with index + 1 because index start from 0 where cell start from 1
                 };
                 cell6.appendChild(removeBtn);
             });
