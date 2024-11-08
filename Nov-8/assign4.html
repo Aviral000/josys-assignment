@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Random Image Slideshow</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    #slideshow {
+      width: 300px;
+      height: 200px;
+      margin: 20px;
+    }
+    #slideshow img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    #controls {
+      display: flex;
+      gap: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Random Image Slideshow</h1>
+  
+  <!-- Slideshow Container -->
+  <div id="slideshow">
+    <img src="https://hips.hearstapps.com/ghk.h-cdn.co/assets/17/41/shih-tzu.jpg?crop=1xw:0.9995429616087751xh;center,top&resize=768:*" alt="Slideshow Image" id="slideshow-image">
+  </div>
+  
+  <!-- Start and Stop Buttons -->
+  <div id="controls">
+    <button onclick="startSlideshow()">Start</button>
+    <button onclick="stopSlideshow()">Stop</button>
+  </div>
+
+  <script>
+    // Array of image URLs
+    const images = [
+      "https://hips.hearstapps.com/ghk.h-cdn.co/assets/17/41/shih-tzu.jpg?crop=1xw:0.9995429616087751xh;center,top&resize=768:*",
+      "http://ghk.h-cdn.co/assets/16/08/gettyimages-179494696.jpg",
+      "https://rescuedoghappiness.com/wp-content/uploads/2021/07/pexels-castorly-stock-3866500-scaled.jpg",
+      "http://images4.fanpop.com/image/photos/18700000/Pomeranian-all-small-dogs-18774613-1280-1024.jpg",
+      "https://www.sheknows.com/wp-content/uploads/2018/08/fajkx3pdvvt9ax6btssg.jpeg?w=1024",
+      "https://www.thelabradorsite.com/wp-content/uploads/2018/07/small-cairn-terrier.jpg"
+    ];
+    
+    let slideshowInterval;
+
+    // Function to start the slideshow
+    function startSlideshow() {
+      if (slideshowInterval) return;
+
+      slideshowInterval = setInterval(() => {
+        const randomIndex = Math.floor(Math.random() * images.length);
+        console.log(randomIndex);
+        document.getElementById("slideshow-image").src = images[randomIndex];
+      }, 2000); // Change image every 2 seconds
+    }
+
+    // Function to stop the slideshow
+    function stopSlideshow() {
+      clearInterval(slideshowInterval);
+      slideshowInterval = null; // Reset interval variable
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>University Finder</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    .odd {
+      background-color: #f0f8ff;
+    }
+    .even {
+      background-color: #e6e6fa;
+    }
+    #result {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>University Finder</h1>
+  <label for="countryInput">Enter Country Name: </label>
+  <input type="text" id="countryInput" placeholder="Enter country name">
+  <button onclick="getUniversities()">Get Universities</button>
+  <div id="result"></div>
+
+  <script>
+    async function getUniversities() {
+      const country = document.getElementById("countryInput").value.trim();
+      const resultDiv = document.getElementById("result");
+      
+      if (!country) {
+        resultDiv.innerHTML = "<p style='color: red;'>Please enter a country name.</p>";
+        return;
+      }
+
+      // API URL of the country based universities
+      const url = `http://universities.hipolabs.com/search?country=${country}`;
+      try {
+        // Fetch data from the API
+        const response = await fetch(url);
+        const data = await response.json();
+
+        // Check if data is empty
+        if (data.length === 0) {
+          resultDiv.innerHTML = "<p>No universities found for this country.</p>";
+          return;
+        }
+
+        // Display the first 20 universities
+        const universities = data.slice(0, 20);
+        let output = "<ol>";
+        
+        // displaying the all the universities based on the india, only first 20 which will pop up
+        universities.forEach((university, index) => {
+          const className = index % 2 === 0 ? "even" : "odd";
+          output += `<li class="${className}">${university.name}, ${university['state-province'] || 'N/A'}</li>`;
+        });
+
+        output += "</ol>";
+        resultDiv.innerHTML = output;
+      } catch (error) {
+        resultDiv.innerHTML = `<p style='color: red;'>Failed to fetch data: ${error.message}</p>`;
+      }
+    }
+  </script>
+</body>
+</html>
