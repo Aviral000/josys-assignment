@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .div1 {
+            display: grid;
+            grid-template-columns: 30% 30% 30%;
+            gap: 1rem;
+        }
+        .item-card {
+            text-align: center;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+        button {
+            margin-top: 0.5rem;
+            padding: 0.5rem;
+            font-size: 0.9rem;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        #checkout {
+            margin-top: 2rem;
+        }
+        .remove-button {
+            margin-left: 1rem;
+            padding: 0.2rem 0.5rem;
+            font-size: 0.8rem;
+            cursor: pointer;
+            color: white;
+            background-color: red;
+            border: none;
+            border-radius: 4px;
+        }
+        #total-price {
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+<body>
+    <h1>E-Shopping District</h1>
+    <button onclick="getItems()">Fetch Items</button>
+    <hr />
+    <div id="image-list" class="div1"></div>
+    <div id="checkout">
+        <h2>Checkout Items</h2>
+        <ul id="checkout-list"></ul>
+        <p id="total-price">Total Price: $0</p>
+    </div>
+
+    <script>
+        const images = [
+            { name: "Book1", price: 500, url: "https://www.shutterstock.com/image-photo/one-book-isolated-on-white-260nw-2157870469.jpg" },
+            { name: "Book2", price: 860, url: "https://media.istockphoto.com/id/153217083/photo/blank-book-cover-w-clipping-path.jpg?s=612x612&w=0&k=20&c=7qqQQXo4q93FvZuivC_Eht5JMQzmHN8AUWVjPw92SaM=" },
+            { name: "Book3", price: 650, url: "https://t3.ftcdn.net/jpg/09/19/18/60/360_F_919186010_fSr5VpYeCQX85AfFV5UnDFDEDvXALRNT.jpg" },
+            { name: "Book4", price: 579, url: "https://www.shutterstock.com/image-photo/one-book-isolated-on-white-260nw-2157870469.jpg" },
+            { name: "Book5", price: 324, url: "https://media.istockphoto.com/id/153217083/photo/blank-book-cover-w-clipping-path.jpg?s=612x612&w=0&k=20&c=7qqQQXo4q93FvZuivC_Eht5JMQzmHN8AUWVjPw92SaM=" },
+            { name: "Book6", price: 389, url: "https://t3.ftcdn.net/jpg/09/19/18/60/360_F_919186010_fSr5VpYeCQX85AfFV5UnDFDEDvXALRNT.jpg" }
+        ];
+
+        let totalPrice = 0;
+
+        function getItems() {
+            const imageDiv = document.getElementById('image-list');
+            imageDiv.innerHTML = "";
+
+            images.forEach((image) => {
+                const divElement = document.createElement('div');
+                divElement.className = "item-card";
+
+                const imgElement = document.createElement('img');
+                imgElement.src = image.url;
+                imgElement.alt = image.name;
+
+                const nameElement = document.createElement('p');
+                nameElement.textContent = image.name;
+                nameElement.style.fontWeight = "bold";
+
+                const button = document.createElement('button');
+                button.textContent = `Buy for $${image.price}`;
+                button.onclick = () => addToCheckout(image);
+
+                divElement.appendChild(imgElement);
+                divElement.appendChild(nameElement);
+                divElement.appendChild(button);
+                imageDiv.appendChild(divElement);
+            });
+        }
+
+        function addToCheckout(item) {
+            const checkoutList = document.getElementById('checkout-list');
+            const listItem = document.createElement('li');
+            listItem.textContent = `${item.name} - $${item.price}`;
+
+            const removeButton = document.createElement('button');
+            removeButton.textContent = "Remove";
+            removeButton.className = "remove-button";
+            removeButton.onclick = () => removeFromCheckout(item, listItem);
+
+            listItem.appendChild(removeButton);
+            checkoutList.appendChild(listItem);
+
+            totalPrice += item.price;
+            const total = document.getElementById('total-price');
+            total.textContent = `Total Price: $${totalPrice}`;
+        }
+
+        function removeFromCheckout(item, listItem) {
+            listItem.remove();
+
+            totalPrice -= item.price;
+            const total = document.getElementById('total-price');
+            total.textContent = `Total Price: $${totalPrice}`;
+        }
+    </script>
+</body>
+</html>
