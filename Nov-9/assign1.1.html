@@ -32,8 +32,12 @@
         #checkout {
             margin-top: 2rem;
         }
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
         .remove-button {
-            margin-left: 1rem;
             padding: 0.2rem 0.5rem;
             font-size: 0.8rem;
             cursor: pointer;
@@ -68,37 +72,67 @@
             { name: "Book6", price: 389, url: "https://t3.ftcdn.net/jpg/09/19/18/60/360_F_919186010_fSr5VpYeCQX85AfFV5UnDFDEDvXALRNT.jpg" }
         ];
 
-        let totalPrice = 0;
+        let cart = [];
 
         function getItems() {
-            document.getElementById('image-list').innerHTML = images.map(item => `
+            const imageDiv = document.getElementById('image-list');
+            imageDiv.innerHTML = images.map(item => `
                 <div class="item-card">
-                    <img src="${item.url}" alt="${item.name}" />
-                    <p><strong>${item.name}</strong></p>
-                    <button onclick="addToCheckout(${images.indexOf(item)})">Buy for $${item.price}</button>
+                    <img src="${item.url}" alt="${item.name}">
+                    <p><b>${item.name}</b></p>
+                    <button onclick="addToCart('${item.name}')">
+                        Buy for $${item.price}
+                    </button>
                 </div>
             `).join('');
         }
 
-        function addToCheckout(index) {
-            const item = images[index];
-            const listItem = document.createElement('li');
-            listItem.innerHTML = `${item.name} - $${item.price} 
-                <button class="remove-button" onclick="removeFromCheckout(${index}, this)">Remove</button>`;
-            document.getElementById('checkout-list').appendChild(listItem);
+        function addToCart(itemName) {
+            const item = images.find(img => img.name === itemName);
+            const cartItem = cart.find(i => i.name === itemName);
 
-            totalPrice += item.price;
-            updateTotalPrice();
+            if (cartItem) {
+                cartItem.quantity++;
+            } else {
+                cart.push({ ...item, quantity: 1 });
+            }
+            
+            updateCartDisplay();
         }
 
-        function removeFromCheckout(index, button) {
-            button.parentNode.remove();
-            totalPrice -= images[index].price;
-            updateTotalPrice();
+        function updateCartDisplay() {
+            const checkoutList = document.getElementById('checkout-list');
+            checkoutList.innerHTML = cart.map(item => `
+                <li id="cart-item-${item.name}">
+                    ${item.name} - $${item.price}
+                    <div class="quantity-controls">
+                        <button onclick="updateQuantity('${item.name}', -1)">-</button>
+                        <span>${item.quantity}</span>
+                        <button onclick="updateQuantity('${item.name}', 1)">+</button>
+                        <button class="remove-button" onclick="removeItem('${item.name}')">Remove</button>
+                    </div>
+                </li>
+            `).join('');
+
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            document.getElementById('total-price').textContent = `Total Price: $${total}`;
         }
 
-        function updateTotalPrice() {
-            document.getElementById('total-price').textContent = `Total Price: $${totalPrice}`;
+        function updateQuantity(itemName, change) {
+            const item = cart.find(i => i.name === itemName);
+            if (item) {
+                item.quantity += change;
+                if (item.quantity <= 0) {
+                    removeItem(itemName);
+                } else {
+                    updateCartDisplay();
+                }
+            }
+        }
+
+        function removeItem(itemName) {
+            cart = cart.filter(item => item.name !== itemName);
+            updateCartDisplay();
         }
     </script>
 </body>
