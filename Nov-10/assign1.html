@@ -149,6 +149,7 @@
         }
 
         LibraryMember.prototype = Object.create(User.prototype);
+        LibraryMember.prototype.constructor = LibraryMember;
 
         LibraryMember.prototype.getMembershipInfo = function() {
             return `Member: ${this.name}, ID: ${this.membershipId}`;
@@ -273,7 +274,16 @@
         }
 
         document.getElementById('return-users').addEventListener('change', function(e) {
-            updateBorrowedBooksList(e.target.value);
+            const selectedUser = e.target.value;
+            updateBorrowedBooksList(selectedUser);
+            
+            const returnButton = document.querySelector('.box5 button');
+            if (selectedUser === 'Select Users') {
+                returnButton.disabled = true;
+            } else {
+                const user = Library.findUserByName(selectedUser);
+                returnButton.disabled = !(user && user.borrowedBooks.length > 0);
+            }
         });
     </script>
 </body>
