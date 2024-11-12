@@ -204,6 +204,8 @@
                 user.borrowedBooks.forEach(book => {
                     borrowedBooksSelect.innerHTML += `<option value="${book.id}">${book.title}</option>`;
                 });
+            } else {
+                document.querySelector('.box5 button').disabled = true;
             }
         }
 
@@ -265,6 +267,7 @@
                 if (user.returnBook(book)) {
                     updateBooksList();
                     updateUsersList();
+                    updateBorrowedBooksList(userName);
                 }
             }
         }
