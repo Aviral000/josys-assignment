@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+body {
+    background-color: rgb(201, 201, 201);
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+}
+
+.heading {
+    text-align: center;
+}
+
+.upper-half {
+    margin-top: 5rem;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.box1, .box2, .box3, .box4, .box5 {
+    background-color: rgb(230, 230, 230);
+}
+
+.box1 {
+    width: 30%;
+}
+
+.box2 {
+    width: 60%;
+}
+
+.lower-half {
+    margin: 3rem;
+    display: grid;
+    grid-template-columns: 30% 30% 30%;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.box3, .box4, .box5 {
+    padding: 2rem;
+    text-align: left;
+}
+
+.box3 input {
+    width: 60%;
+    height: 2rem;
+    border-radius: 15px;
+}
+
+.user-scroll {
+    display: flex;
+}
+
+.books-scroll {
+    display: flex;
+}
+
+.user-scroll, .books-scroll {
+    select {
+        width: 60%;
+        height: 2rem;
+        border-radius: 15px;
+    }
+}
+
+.lower-half button {
+    display: block;
+    width: 100%;
+    margin-top: 1rem;
+    padding: 0.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #fff;
+    background-color: #333;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.lower-half button:hover {
+    background-color: #555;
+}

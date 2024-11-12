@@ -1,0 +1,242 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Management System</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body onload="getBooks()">
+    <div class="heading">
+        <h1>Library Management System</h1>
+    </div>
+    <div class="upper-half">
+        <div class="box1">
+            <h3>Available Books</h3>
+            <div id="books-listing"></div>
+        </div>
+        <div class="box2">
+            <h3>Borrowed Books By User</h3>
+            <div id="user-books"></div>
+        </div>
+    </div>
+    <div class="lower-half">
+        <div class="box3">
+            <h4>Create User / Member</h4>
+            <div>
+                <label>Username: </label>
+                <input type="text" placeholder="username..." id="create-user" required>
+            </div>
+            <div style="margin-top: 1rem;">
+                <label>Membership ID: </label>
+                <input type="text" placeholder="ID no." id="create-member">
+            </div>
+            <button type="submit" onclick="createUser()">Create a user</button>
+        </div>
+        <div class="box4">
+            <h4>Borrow a Book</h4>
+            <div class="user-scroll">
+                <p>Users: </p>
+                <select name="user" id="borrow-user">
+                    <option>Select Users</option>
+                </select>
+            </div>
+            <div class="books-scroll">
+                <p>Available Books: </p>
+                <select name="books" id="available-books">
+                    <option>Select Books</option>
+                </select>
+            </div>
+            <button type="submit" onclick="borrowBook()">Borrow a book</button>
+        </div>
+        <div class="box5">
+            <h4>Return a Book</h4>
+            <div class="user-scroll">
+                <p>Users: </p>
+                <select name="user" id="return-users">
+                    <option></option>
+                </select>
+            </div>
+            <div class="books-scroll">
+                <p>Borrowed Books: </p>
+                <select name="books" id="borrowed-books">
+                    <option></option>
+                </select>
+            </div>
+            <button type="submit" onclick="returnBook()">Return a book</button>
+        </div>
+        <div></div>
+    </div>
+    <script>
+        const books = [
+            { id: 1, name: "To Kill a Mockingbird", author: "Harper Lee" },
+            { id: 2, name: "1984", author: "George Orwell" },
+            { id: 3, name: "The Great Gatsby", author: "F. Scott Fitzgerald" },
+            { id: 4, name: "Pride and Prejudice", author: "Jane Austen" },
+            { id: 5, name: "The Catcher in the Rye", author: "J.D. Salinger" },
+            { id: 6, name: "The Hobbit", author: "J.R.R. Tolkien" },
+            { id: 7, name: "Moby-Dick", author: "Herman Melville" },
+            { id: 8, name: "War and Peace", author: "Leo Tolstoy" },
+            { id: 9, name: "The Odyssey", author: "Homer" },
+            { id: 10, name: "Jane Eyre", author: "Charlotte Brontë" }
+        ];
+    
+        const users = [];
+        const borrowedBooks = {};
+    
+        function User(name, memberId) {
+            this.name = name;
+            this.memberId = memberId ? memberId : "N/A";
+    
+            this.create = function() {
+                const userData = {
+                    username: this.name,
+                    membershipId: this.memberId
+                }
+                users.push(userData);
+                borrowedBooks[this.memberId] = [];
+                updateUsersDropdown();
+            }
+        }
+    
+        function getBooks() {
+            const bookId = document.getElementById('books-listing');
+            bookId.innerHTML = "";
+            books.forEach((book) => {
+                const pElement = document.createElement('p');
+                pElement.innerHTML = `<strong style="text-decoration: underline;">${book.name}</strong> by <i>${book.author}</i>`;
+                bookId.appendChild(pElement);
+            });
+            updateAvailableBooksDropdown();
+        }
+    
+        function createUser() {
+            if(validateUser()) {
+                alert('username is already taken');
+                return;
+            }
+            const userInputId = document.getElementById('create-user');
+            const memberInputId = document.getElementById('create-member');
+
+            const newUser = new User(userInputId.value, memberInputId.value);
+            newUser.create();
+            
+            userInputId.value = '';
+            memberInputId.value = '';
+            alert("User created successfully!");
+        }
+
+        function validateUser(name) {
+            const error = users.find((user) => user.name === name);
+
+            return error ? true : false;
+        }
+    
+        function updateUsersDropdown() {
+            const usersDropdown = document.getElementById("borrow-user");
+            usersDropdown.innerHTML = "<option>Select Users</option>";
+    
+            users.forEach((user) => {
+                const option = document.createElement("option");
+                option.value = user.membershipId;
+                option.text = `${user.username} (ID: ${user.membershipId})`;
+                usersDropdown.appendChild(option);
+            });
+    
+            const returnUsersDropdown = document.getElementById("return-users");
+            returnUsersDropdown.innerHTML = "<option>Select Users</option>";
+            users.forEach((user) => {
+                const option = document.createElement("option");
+                option.value = user.membershipId;
+                option.text = `${user.username} (ID: ${user.membershipId})`;
+                returnUsersDropdown.appendChild(option);
+            });
+        }
+    
+        function updateAvailableBooksDropdown() {
+            const booksDropdown = document.getElementById("available-books");
+            booksDropdown.innerHTML = "<option>Select Books</option>";
+    
+            books.forEach((book) => {
+                const option = document.createElement("option");
+                option.value = book.id;
+                option.text = `${book.name} by ${book.author}`;
+                booksDropdown.appendChild(option);
+            });
+        }
+    
+        function borrowBook() {
+            const userId = document.getElementById("borrow-user").value;
+            const bookId = parseInt(document.getElementById("available-books").value);
+            const book = books.find(b => b.id === bookId);
+
+            removeBookWhenBorrowed(book.id);
+    
+            if (userId && book) {
+                borrowedBooks[userId].push(book);
+                alert(`${book.name} has been borrowed!`);
+                updateUserBooks(userId);
+            }
+        }
+
+        function removeBookWhenBorrowed(id) {
+            const bookIndex = books.findIndex((book) => book.id === id);
+            books.splice(bookIndex, 1);
+            getBooks();
+        }
+    
+        function updateUserBooks(userId) {
+            const userBooksDiv = document.getElementById("user-books");
+            userBooksDiv.innerHTML = "";
+    
+            borrowedBooks[userId].forEach(book => {
+                const pElement = document.createElement("p");
+                pElement.textContent = `${book.name} by ${book.author}`;
+                userBooksDiv.appendChild(pElement);
+            });
+        }
+    
+        function returnBook() {
+            const userId = document.getElementById("return-users").value;
+            const borrowedBooksList = borrowedBooks[userId];
+            const bookId = parseInt(document.getElementById("borrowed-books").value);
+    
+            if (userId && borrowedBooksList) {
+                const bookIndex = borrowedBooksList.findIndex(b => b.id === bookId);
+                if (bookIndex > -1) {
+                    const returnedBook = borrowedBooksList.splice(bookIndex, 1)[0];
+                    alert("Book returned successfully!");
+                    updateUserBooks(userId);
+
+                    addBookOnReturn(returnedBook.id, returnedBook.name, returnedBook.author);
+                    updateAvailableBooksDropdown();
+                }
+            }
+        }
+
+        function addBookOnReturn(id, name, author) {
+            const bookData = {
+                id, name, author
+            }
+            books.push(bookData);
+            books.sort((a,b) => a.id - b.id);
+            getBooks();
+        }
+    
+        function updateBorrowedBooksDropdown() {
+            const userId = document.getElementById("return-users").value;
+            const booksDropdown = document.getElementById("borrowed-books");
+            booksDropdown.innerHTML = "<option>Select Book</option>";
+    
+            (borrowedBooks[userId] || []).forEach((book) => {
+                const option = document.createElement("option");
+                option.value = book.id;
+                option.text = `${book.name} by ${book.author}`;
+                booksDropdown.appendChild(option);
+            });
+        }
+    
+        document.getElementById("borrow-user").addEventListener("change", updateBorrowedBooksDropdown);
+        document.getElementById("return-users").addEventListener("change", updateBorrowedBooksDropdown);
+    </script>    
+</body>
+</html>

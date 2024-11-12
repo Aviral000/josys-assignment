@@ -1,0 +1,277 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Management System</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body onload="getBooks()">
+    <div class="heading">
+        <h1>Library Management System</h1>
+    </div>
+    <div class="upper-half">
+        <div class="box1">
+            <h3>Available Books</h3>
+            <div id="books-listing"></div>
+        </div>
+        <div class="box2">
+            <h3>Borrowed Books By User</h3>
+            <div id="user-books"></div>
+        </div>
+    </div>
+    <div class="lower-half">
+        <div class="box3">
+            <h4>Create User / Member</h4>
+            <div>
+                <label>Username: </label>
+                <input type="text" placeholder="username..." id="create-user" required>
+            </div>
+            <div style="margin-top: 1rem;">
+                <label>Membership ID: </label>
+                <input type="text" placeholder="ID no." id="create-member">
+            </div>
+            <button type="submit" onclick="createUser()">Create a user</button>
+        </div>
+        <div class="box4">
+            <h4>Borrow a Book</h4>
+            <div class="user-scroll">
+                <p>Users: </p>
+                <select name="user" id="borrow-user">
+                    <option>Select Users</option>
+                </select>
+            </div>
+            <div class="books-scroll">
+                <p>Available Books: </p>
+                <select name="books" id="available-books">
+                    <option>Select Books</option>
+                </select>
+            </div>
+            <button type="submit" onclick="borrowBook()">Borrow a book</button>
+        </div>
+        <div class="box5">
+            <h4>Return a Book</h4>
+            <div class="user-scroll">
+                <p>Users: </p>
+                <select name="user" id="return-users">
+                    <option>Select Users</option>
+                </select>
+            </div>
+            <div class="books-scroll">
+                <p>Borrowed Books: </p>
+                <select name="books" id="borrowed-books">
+                    <option>Select Books</option>
+                </select>
+            </div>
+            <button type="submit" onclick="returnBook()">Return a book</button>
+        </div>
+        <div></div>
+    </div>
+    <script>
+        const books = [
+            { id: 1, name: "To Kill a Mockingbird", author: "Harper Lee" },
+            { id: 2, name: "1984", author: "George Orwell" },
+            { id: 3, name: "The Great Gatsby", author: "F. Scott Fitzgerald" },
+            { id: 4, name: "Pride and Prejudice", author: "Jane Austen" },
+            { id: 5, name: "The Catcher in the Rye", author: "J.D. Salinger" },
+            { id: 6, name: "The Hobbit", author: "J.R.R. Tolkien" },
+            { id: 7, name: "Moby-Dick", author: "Herman Melville" },
+            { id: 8, name: "War and Peace", author: "Leo Tolstoy" },
+            { id: 9, name: "The Odyssey", author: "Homer" },
+            { id: 10, name: "Jane Eyre", author: "Charlotte Brontë" }
+        ];
+
+        const Library = {
+            books: [],
+            users: [],
+            
+            initializeBooks(booksList) {
+                this.books = booksList.map(book => createBook(book.id, book.name, book.author));
+            },
+            
+            addBook(id, title, author) {
+                const book = createBook(id, title, author);
+                this.books.push(book);
+            },
+            
+            getAvailableBooks() {
+                return this.books.filter(book => !book.isBorrowed);
+            },
+            
+            findBookById(id) {
+                return this.books.find(book => book.id === id);
+            },
+            
+            addUser(user) {
+                this.users.push(user);
+            },
+            
+            findUserByName(name) {
+                return this.users.find(user => user.name === name);
+            }
+        };
+
+        function createBook(id, title, author) {
+            return {
+                id,
+                title,
+                author,
+                isBorrowed: false
+            };
+        }
+
+        function User(name) {
+            this.name = name;
+            this.borrowedBooks = [];
+        }
+
+        User.prototype.borrowBook = function(book) {
+            if (!book.isBorrowed) {
+                book.isBorrowed = true;
+                this.borrowedBooks.push(book);
+                return true;
+            }
+            return false;
+        };
+
+        User.prototype.returnBook = function(book) {
+            const index = this.borrowedBooks.findIndex(b => b.id === book.id);
+            if (index !== -1) {
+                book.isBorrowed = false;
+                this.borrowedBooks.splice(index, 1);
+                return true;
+            }
+            return false;
+        };
+
+        function LibraryMember(name, membershipId) {
+            User.call(this, name);
+            this.membershipId = membershipId;
+        }
+
+        LibraryMember.prototype = Object.create(User.prototype);
+
+        LibraryMember.prototype.getMembershipInfo = function() {
+            return `Member: ${this.name}, ID: ${this.membershipId}`;
+        };
+
+        function getBooks() {
+            Library.initializeBooks(books);
+            updateBooksList();
+        }
+
+        function updateBooksList() {
+            const booksListing = document.getElementById('books-listing');
+            const availableBooks = document.getElementById('available-books');
+            
+            booksListing.innerHTML = '';
+            availableBooks.innerHTML = '<option>Select Books</option>';
+            
+            Library.getAvailableBooks().forEach(book => {
+                booksListing.innerHTML += `<p>${book.title} by ${book.author}</p>`;
+                availableBooks.innerHTML += `<option value="${book.id}">${book.title}</option>`;
+            });
+        }
+
+        function updateUsersList() {
+            const borrowUser = document.getElementById('borrow-user');
+            const returnUsers = document.getElementById('return-users');
+            const userBooks = document.getElementById('user-books');
+            
+            borrowUser.innerHTML = '<option>Select Users</option>';
+            returnUsers.innerHTML = '<option>Select Users</option>';
+            userBooks.innerHTML = '';
+            
+            Library.users.forEach(user => {
+                const userOption = `<option value="${user.name}">${user.name}${user.membershipId ? ` (Member ID: ${user.membershipId})` : ''}</option>`;
+                borrowUser.innerHTML += userOption;
+                returnUsers.innerHTML += userOption;
+                
+                if (user.borrowedBooks.length > 0) {
+                    userBooks.innerHTML += `<p><strong>${user.name}'s books:</strong></p>`;
+                    user.borrowedBooks.forEach(book => {
+                        userBooks.innerHTML += `<p>- ${book.title}</p>`;
+                    });
+                }
+            });
+        }
+
+        function updateBorrowedBooksList(userName) {
+            const borrowedBooksSelect = document.getElementById('borrowed-books');
+            borrowedBooksSelect.innerHTML = '<option>Select Books</option>';
+            
+            const user = Library.findUserByName(userName);
+            if (user && user.borrowedBooks.length > 0) {
+                user.borrowedBooks.forEach(book => {
+                    borrowedBooksSelect.innerHTML += `<option value="${book.id}">${book.title}</option>`;
+                });
+            }
+        }
+
+        function createUser() {
+            const nameInput = document.getElementById('create-user');
+            const membershipInput = document.getElementById('create-member');
+            
+            const name = nameInput.value.trim();
+            const membershipId = membershipInput.value.trim();
+
+            if (!name) {
+                alert('Please enter a username');
+                return;
+            }
+    
+            if (Library.users.some(user => user.name.toLowerCase() === name.toLowerCase())) {
+                alert('This username is already taken. Please choose a different one.');
+                nameInput.value = '';
+                return;
+            }
+            
+            if (name) {
+                const user = membershipId ? 
+                    new LibraryMember(name, membershipId) : 
+                    new User(name);
+                    
+                alert("New User created Successfully");
+                Library.addUser(user);
+                updateUsersList();
+                
+                nameInput.value = '';
+                membershipInput.value = '';
+            }
+        }
+
+        function borrowBook() {
+            const userName = document.getElementById('borrow-user').value;
+            const bookId = parseInt(document.getElementById('available-books').value);
+            
+            const user = Library.findUserByName(userName);
+            const book = Library.findBookById(bookId);
+            
+            if (user && book) {
+                if (user.borrowBook(book)) {
+                    updateBooksList();
+                    updateUsersList();
+                }
+            }
+        }
+
+        function returnBook() {
+            const userName = document.getElementById('return-users').value;
+            const bookId = parseInt(document.getElementById('borrowed-books').value);
+            
+            const user = Library.findUserByName(userName);
+            const book = Library.findBookById(bookId);
+            
+            if (user && book) {
+                if (user.returnBook(book)) {
+                    updateBooksList();
+                    updateUsersList();
+                }
+            }
+        }
+
+        document.getElementById('return-users').addEventListener('change', function(e) {
+            updateBorrowedBooksList(e.target.value);
+        });
+    </script>
+</body>
+</html>
