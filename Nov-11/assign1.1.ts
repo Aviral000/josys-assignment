@@ -44,6 +44,7 @@ function getMembersByRole(members: Member[], role: MemberRole): Member[] {
 
 function countBooksByGenre(books: Book[]): Partial<Record<BookGenre, number>> {
     // const genreCounts: { [key in BookGenre]?: number } = {};
+    // console.log(genreCounts);
 
     // for (const book of books) {
     //     genreCounts[book.genre] = (genreCounts[book.genre] ?? 0) + 1;
@@ -51,6 +52,7 @@ function countBooksByGenre(books: Book[]): Partial<Record<BookGenre, number>> {
 
     // return genreCounts;
     const genreCounts: Partial<Record<BookGenre, number>> = {};
+    console.log(genreCounts);
 
     books.forEach(book => genreCounts[book.genre] = (genreCounts[book.genre] || 0) + 1);
 

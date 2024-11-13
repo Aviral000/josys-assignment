@@ -22,8 +22,22 @@ function getBooksByGenre(books, genre) {
 function getMembersByRole(members, role) {
     return members.filter(function (member) { return member.role === role; });
 }
+// type Data = {
+//     BookGenre: string,
+//     number: number
+// }
+// type Partial = {
+//     Record: Data
+// }
 function countBooksByGenre(books) {
+    // const genreCounts: { [key in BookGenre]?: number } = {};
+    // console.log(genreCounts);
+    // for (const book of books) {
+    //     genreCounts[book.genre] = (genreCounts[book.genre] ?? 0) + 1;
+    // }
+    // return genreCounts;
     var genreCounts = {};
+    console.log(genreCounts);
     books.forEach(function (book) { return genreCounts[book.genre] = (genreCounts[book.genre] || 0) + 1; });
     return genreCounts;
 }
