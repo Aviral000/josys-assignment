@@ -27,7 +27,7 @@ arr.forEach(function (element, index) {
         console.log(element);
     }, 250 * (index + 1));
 });
-var findThree = arr.find(function (element) { return element === 3; });
+var findThree = arr.find(function (element) { return element === 6; });
 console.log("Array after find: ", findThree);
 var findIndexOfThree = arr.findIndex(function (element) { return element === 3; });
 console.log("Array after findIndex: ", findIndexOfThree);

@@ -36,7 +36,7 @@ arr.forEach((element, index) => {
     }, 250*(index+1));
 })
 
-const findThree: (number | undefined) = arr.find((element) => element === 3);
+const findThree: (number | undefined) = arr.find((element) => element === 6);
 console.log("Array after find: ", findThree);
 
 const findIndexOfThree: (number | undefined) = arr.findIndex((element) => element === 3);
