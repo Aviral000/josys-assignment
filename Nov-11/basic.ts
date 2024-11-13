@@ -1,5 +1,5 @@
-let arr: number[] = [1,2,3,4,5,6,7,8,10];
-console.log("Original Array: ", arr);
+// let arr: number[] = [1,2,3,4,5,6,7,8,10];
+// console.log("Original Array: ", arr);
 
 // arr.push(11);
 // console.log("Array after push: ", arr);
@@ -36,14 +36,14 @@ console.log("Original Array: ", arr);
 //     }, 250*(index+1));
 // })
 
-const findThree: (number | undefined) = arr.find((element) => element === 6);
-console.log("Array after find: ", findThree);
+// const findThree: (number | undefined) = arr.find((element) => element === 6);
+// console.log("Array after find: ", findThree);
 
-const findIndexOfThree: (number | undefined) = arr.findIndex((element) => element === 3);
-console.log("Array after findIndex: ", findIndexOfThree);
+// const findIndexOfThree: (number | undefined) = arr.findIndex((element) => element === 3);
+// console.log("Array after findIndex: ", findIndexOfThree);
 
-const includeThree: (boolean | undefined) = arr.includes(3);
-console.log("Array after include: ", includeThree);
+// const includeThree: (boolean | undefined) = arr.includes(3);
+// console.log("Array after include: ", includeThree);
 
 
 // function processInput(input: string | number | boolean | number[]) {
