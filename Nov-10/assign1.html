@@ -149,7 +149,20 @@
         }
 
         LibraryMember.prototype = Object.create(User.prototype);
+
+        const member = new LibraryMember("John", "123");
+
+        // Without fixing constructor:
+        console.log(member.constructor); // Points to User
+        console.log(member instanceof LibraryMember); // true
+        console.log(member.constructor === LibraryMember); // false
+
         LibraryMember.prototype.constructor = LibraryMember;
+
+        // With fixing constructor:
+        console.log(member.constructor); // Points to LibraryMember
+        console.log(member instanceof LibraryMember); // true
+        console.log(member.constructor === LibraryMember); // true
 
         LibraryMember.prototype.getMembershipInfo = function() {
             return `Member: ${this.name}, ID: ${this.membershipId}`;
