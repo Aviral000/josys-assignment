@@ -19,6 +19,7 @@ interface Book {
     warranty: boolean;
   }
   
+  // class with extend in generic so that i can utilize it inside my class with same type as generics or params
   class Inventory<T extends { id: string; name: string }> {
     private items: T[] = [];
   
@@ -44,8 +45,8 @@ interface Book {
   }
   
   const bookInventory = new Inventory<Book>();
-  bookInventory.addItem({ id: "1", name: "1984", author: "George Orwell", pages: 328 });
-  bookInventory.addItem({ id: "2", name: "To Kill a Mockingbird", author: "Harper Lee", pages: 281 });
+  bookInventory.addItem({ id: "1", name: "AA", author: "A", pages: 328 });
+  bookInventory.addItem({ id: "2", name: "BB", author: "B", pages: 281 });
   console.log("Book Inventory:", bookInventory.getItems());
   console.log("Find Book by ID '1':", bookInventory.findItem("1"));
   console.log("Remove Book by ID '2':", bookInventory.removeItem("2"));
@@ -53,7 +54,7 @@ interface Book {
   
   const clothingInventory = new Inventory<Clothing>();
   clothingInventory.addItem({ id: "1", name: "T-Shirt", size: "M", material: "Cotton" });
-  clothingInventory.addItem({ id: "2", name: "Jeans", size: "L", material: "Denim" });
+  clothingInventory.addItem({ id: "2", name: "Jeans", size: "L", material: "Wool" });
   console.log("Clothing Inventory:", clothingInventory.getItems());
   console.log("Find Clothing by ID '1':", clothingInventory.findItem("1"));
   console.log("Remove Clothing by ID '2':", clothingInventory.removeItem("2"));
