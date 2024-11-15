@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Employee } from '../model/Employee.model';
+import React, { useState } from "react";
+import { Employee } from "../model/Employee.model";
 
 const AddEmployee = () => {
   const [name, setName] = useState<string>("");
@@ -7,21 +7,50 @@ const AddEmployee = () => {
   const [salary, setSalary] = useState<number>(0);
   const [depttNo, setDepttNo] = useState<number>(0);
   const [employees, setEmployees] = useState<Employee[]>([]);
+  const [selectedEmployee, setSelectedEmployee] = useState<number | null>(null);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const newEmployee = new Employee(name, job, salary, depttNo);
-    setEmployees([...employees, newEmployee]);
+
+    if (selectedEmployee !== null) {
+      const updatedEmployees = employees.map((employee, index) =>
+        index === selectedEmployee
+          ? new Employee(name, job, salary, depttNo)
+          : employee
+      );
+      setEmployees(updatedEmployees);
+      setSelectedEmployee(null);
+    } else {
+      const newEmployee = new Employee(name, job, salary, depttNo);
+      setEmployees([...employees, newEmployee]);
+    }
+
     setName("");
     setJob("");
     setSalary(0);
     setDepttNo(0);
   };
 
+  const handleUpdate = (index: number) => {
+    const employee = employees[index];
+    setName(employee.name);
+    setJob(employee.job);
+    setSalary(employee.salary);
+    setDepttNo(employee.depttNo);
+    setSelectedEmployee(index);
+  };
+
+  const handleDelete = (index: number) => {
+    const updatedEmployees = employees.filter((_, i) => i !== index);
+    setEmployees(updatedEmployees);
+  };
+
   return (
     <div className="p-6 bg-gray-100 min-h-screen flex">
       <section className="w-1/2 p-6 bg-white rounded-lg shadow-md">
-        <h2 className="text-xl font-bold mb-6 text-gray-700">Add New Employee</h2>
+        <h2 className="text-xl font-bold mb-6 text-gray-700">
+          {selectedEmployee !== null ? "Update Employee" : "Add New Employee"}
+        </h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label htmlFor="name" className="block text-sm font-medium text-gray-700">
@@ -81,9 +110,13 @@ const AddEmployee = () => {
           </div>
           <button
             type="submit"
-            className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 focus:ring focus:ring-blue-300"
+            className={`w-full ${
+              selectedEmployee !== null ? "bg-green-500" : "bg-blue-500"
+            } text-white py-2 rounded-lg hover:opacity-90 focus:ring ${
+              selectedEmployee !== null ? "focus:ring-green-300" : "focus:ring-blue-300"
+            }`}
           >
-            Add Employee
+            {selectedEmployee !== null ? "Update Employee" : "Add Employee"}
           </button>
         </form>
       </section>
@@ -101,6 +134,20 @@ const AddEmployee = () => {
                 <p className="text-sm text-gray-600">{employee.job}</p>
                 <p className="text-sm text-gray-600">Salary: ${employee.salary}</p>
                 <p className="text-sm text-gray-600">Dept: {employee.depttNo}</p>
+              </div>
+              <div className="flex space-x-2">
+                <button
+                  onClick={() => handleUpdate(index)}
+                  className="text-sm text-white bg-yellow-500 px-4 py-2 rounded-lg hover:bg-yellow-600 focus:ring focus:ring-yellow-300"
+                >
+                  Update
+                </button>
+                <button
+                  onClick={() => handleDelete(index)}
+                  className="text-sm text-white bg-red-500 px-4 py-2 rounded-lg hover:bg-red-600 focus:ring focus:ring-red-300"
+                >
+                  Delete
+                </button>
               </div>
             </div>
           ))}
