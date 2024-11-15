@@ -5,7 +5,7 @@ interface UserProp {
     age?: number
 }
 
-export default function Basic1({name, age}: UserProp) {
+export const Basic1: React.FC<UserProp> = ({name, age}) => {
   return (
     <div>
       <h1>Hello {name}{!age ? "": `, Your age is ${age}`}</h1>
