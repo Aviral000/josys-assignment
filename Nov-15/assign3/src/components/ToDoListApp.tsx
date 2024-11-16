@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { gsap } from "gsap";
 import { TaskListMemo } from "./TaskList";
 
@@ -21,7 +21,7 @@ const ToDoListApp = () => {
     }
   };
 
-  const deleteTask = (index: number) => {
+  const deleteTask = useCallback((index: number) => {
     const itemToRemove = document.querySelector(`.task-item-${index}`);
     if (itemToRemove) {
       gsap.to(itemToRemove, {
@@ -34,7 +34,7 @@ const ToDoListApp = () => {
         },
       });
     }
-  };
+  }, []);
 
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center">
