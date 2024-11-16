@@ -11,8 +11,14 @@ const AddEmployee = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    e.stopPropagation();
 
     if (selectedEmployee !== null) {
+      const filterDuplicate = employees.findIndex(emp => emp.name.toLowerCase() === name.toLowerCase());
+      if(filterDuplicate !== -1) {
+        alert("User with that name is Already exist. Please use suffix/prefix to add with same name");
+        return;
+      }
       const updatedEmployees = employees.map((employee, index) =>
         index === selectedEmployee
           ? new Employee(name, job, salary, depttNo)
@@ -21,6 +27,11 @@ const AddEmployee = () => {
       setEmployees(updatedEmployees);
       setSelectedEmployee(null);
     } else {
+      const filterDuplicate = employees.findIndex(emp => emp.name.toLowerCase() === name.toLowerCase());
+      if(filterDuplicate !== -1) {
+        alert("User with that name is Already exist. Please use suffix/prefix to add with same name");
+        return;
+      }
       const newEmployee = new Employee(name, job, salary, depttNo);
       setEmployees([...employees, newEmployee]);
     }
@@ -44,6 +55,14 @@ const AddEmployee = () => {
     const updatedEmployees = employees.filter((_, i) => i !== index);
     setEmployees(updatedEmployees);
   };
+  
+  const handleCancel = () => {
+    setSelectedEmployee(null);
+    setName("");
+    setJob("");
+    setSalary(0);
+    setDepttNo(0);
+  }
 
   return (
     <div className="p-6 bg-gray-100 min-h-screen flex">
@@ -118,6 +137,13 @@ const AddEmployee = () => {
           >
             {selectedEmployee !== null ? "Update Employee" : "Add Employee"}
           </button>
+          {selectedEmployee !== null && <button
+            type="submit"
+            className="w-full bg-red-500 text-white py-2 rounded-lg hover:opacity-90 focus:ring focus:ring-zinc-600"
+            onClick={handleCancel}
+          >
+            Cancel
+          </button>}
         </form>
       </section>
 
@@ -157,4 +183,6 @@ const AddEmployee = () => {
   );
 };
 
-export default AddEmployee;
+const AddEmployeeMemo = React.memo(AddEmployee);
+
+export default AddEmployeeMemo;

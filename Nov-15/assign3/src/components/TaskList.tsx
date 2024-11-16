@@ -35,4 +35,6 @@ const TaskList:React.FC<Taskprop> = ({
     );
   };
 
-  export { TaskList };
+  const TaskListMemo = React.memo(TaskList);
+
+  export { TaskListMemo };

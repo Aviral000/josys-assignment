@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { gsap } from "gsap";
-import { TaskList } from "./TaskList";
+import { TaskListMemo } from "./TaskList";
 
 const ToDoListApp = () => {
   const [tasks, setTasks] = useState<string[]>([]);
@@ -57,7 +57,7 @@ const ToDoListApp = () => {
             Add
           </button>
         </div>
-        <TaskList tasks={tasks} deleteTask={deleteTask} />
+        <TaskListMemo tasks={tasks} deleteTask={deleteTask} />
       </div>
     </div>
   );

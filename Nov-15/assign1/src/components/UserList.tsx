@@ -31,9 +31,9 @@ const UserList: React.FC = () => {
 
   return (
     <div>
-      <button onClick={handleClick} className="border-white border-2">
+      {data.length === 0 && (<button onClick={handleClick} className="border-white border-2" >
         Click me
-      </button>
+      </button>)}
       {visibleUsers.map((user) => (
         <div key={user.email} className="flex items-center gap-3 m-6">
           <div>
@@ -49,4 +49,6 @@ const UserList: React.FC = () => {
   );
 };
 
-export default UserList;
+const UserListMemo = React.memo(UserList);
+
+export default UserListMemo;
