@@ -15,7 +15,7 @@ const AddEmployee = () => {
 
     if (selectedEmployee !== null) {
       const filterDuplicate = employees.findIndex(emp => emp.name.toLowerCase() === name.toLowerCase());
-      if(filterDuplicate !== -1) {
+      if(filterDuplicate !== -1 && selectedEmployee === null) {
         alert("User with that name is Already exist. Please use suffix/prefix to add with same name");
         return;
       }
