@@ -1,11 +1,36 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { UserDetail } from '../models/user.model'
 import axios from 'axios';
+import gsap from 'gsap';
 
 const UserList: React.FC = () => {
 const [users, setUsers] = useState<UserDetail[]>([]);
 const [selectedUsers, setSelectedUsers] = useState<UserDetail[]>([]);
 const [selected, setSelected] = useState<Boolean>(false);
+const selectRef = useRef<HTMLSelectElement>(null);
+const tableRef = useRef<HTMLTableElement>(null);
+
+useLayoutEffect(() => {
+    gsap.fromTo(selectRef.current, {
+        x: "+100vw",
+        opacity: 0
+    }, {
+        x: 0,
+        opacity: 1,
+        duration: 2,
+        ease: 'bounce.inOut'
+    });
+
+    gsap.fromTo(tableRef.current, {
+        y: "50vh",
+        opacity: 0
+    }, {
+        y: 0,
+        delay: 2,
+        opacity: 1,
+        duration: 2
+    });
+}, [])
 
 const getData = async () => {
     try {
@@ -52,7 +77,7 @@ const UserDisplay = () => {
   return (
     <div>
       <div>
-        <select onChange={handleChangeCountry}>
+        <select onChange={handleChangeCountry} className='m-8 p-2 border-2 border-black' ref={selectRef}>
             <option>Select a country</option>
             {users.map((user) => (
                 <option value={user.Country}>
@@ -62,7 +87,7 @@ const UserDisplay = () => {
         </select>
       </div>
       <div>
-        <table className='w-full text-center'>
+        <table className='w-full text-center' ref={tableRef}>
             <thead className='bg-orange-600 text-3xl font-light border-2 border-black'>
                 <tr>
                     <th>Customer Name</th>
