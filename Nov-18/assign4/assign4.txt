@@ -1,0 +1,17 @@
+What is useCallback?
+On the other hand, useCallback is another React hook that is used to memoize functions.
+It ensures that a function reference remains the same between renders unless its dependencies change.
+This is particularly important when passing callback functions to child components that rely on reference equality to prevent unnecessary re-renders.
+
+EXAMPLE:
+
+import React, { useCallback } from 'react';
+
+function UseCallbackFn({ onButtonClick }) {
+    const handleClick = useCallback(() => {
+        console.log('Button clicked!');
+        onButtonClick();
+    }, [onButtonClick]);
+
+    return <button onClick={handleClick}>Click Me</button>;
+}

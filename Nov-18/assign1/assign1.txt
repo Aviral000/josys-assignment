@@ -1,0 +1,20 @@
+What is useMemo?
+useMemo is a React hook that helps optimize performance by memoizing the result of a computation.
+Essentially, it allows us to cache the result of a function so that it doesn't need to be recalculated on every render unless its dependencies change.
+This can be particularly useful when you have expensive calculations or operations that don't need to run every time your component renders.
+
+EXAMPLE:
+
+import React, { useMemo } from 'react';
+
+function UseMemoFn({ items }) {
+    const expensiveCalculation = (items) => {
+        // Some expensive calculation
+        return items.reduce((acc, item) => acc + item.value, 0);
+    };
+
+    // Use useMemo to memoize the result
+    const totalValue = useMemo(() => expensiveCalculation(items), [items]);
+
+    return <div>Total Value: {totalValue}</div>;
+}
