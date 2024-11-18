@@ -6,7 +6,6 @@ import gsap from 'gsap';
 const UserList: React.FC = () => {
 const [users, setUsers] = useState<UserDetail[]>([]);
 const [selectedUsers, setSelectedUsers] = useState<UserDetail[]>([]);
-const [selected, setSelected] = useState<Boolean>(false);
 const selectRef = useRef<HTMLSelectElement>(null);
 const tableRef = useRef<HTMLTableElement>(null);
 
@@ -52,14 +51,13 @@ const handleChangeCountry = (e: React.ChangeEvent<HTMLSelectElement>) => {
     if(e.target.value !== "Select a country") {
         const filterData = users.filter(user => user.Country === e.target.value);
         setSelectedUsers(filterData);
-        setSelected(true);
     } else {
-        setSelected(false);
+        setSelectedUsers([]);
     }
 }
 
 const UserDisplay = () => {
-    return !selected ? (users.map((user, index) => (
+    return selectedUsers.length === 0 ? (users.map((user, index) => (
         <tr className={index % 2 === 0 ? "bg-orange-200 text-xl border-2 border-black" : "bg-orange-400 text-xl border-2 border-black"}>
             <td>{user.Name}</td>
             <td>{user.City}</td>
@@ -74,14 +72,19 @@ const UserDisplay = () => {
     )))
 }
 
+const getUniqueCountries = () => {
+    const countries = users.map((user) => user.Country);
+    return Array.from(new Set(countries));
+};
+
   return (
     <div>
       <div>
         <select onChange={handleChangeCountry} className='m-8 p-2 border-2 border-black' ref={selectRef}>
             <option>Select a country</option>
-            {users.map((user) => (
-                <option value={user.Country}>
-                    {user.Country}
+            {getUniqueCountries().map((country, index) => (
+                <option key={`${country}-${index}`} value={country}>
+                    {country}
                 </option>
             ))}
         </select>
