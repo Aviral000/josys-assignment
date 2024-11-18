@@ -56,7 +56,7 @@ const getUniqueCountries = () => {
     <div>
       <div>
         <select onChange={handleChangeCountry} className='m-8 p-2 border-2 border-black'>
-            <option>Select a country</option>
+            <option>All Countries</option>
             {getUniqueCountries().map((country, index) => (
                 <option key={`${country}-${index}`} value={country}>
                     {country}
