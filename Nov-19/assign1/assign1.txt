@@ -1,0 +1,24 @@
+ContextAPI in Class Component:
+
+1. Creation of the context:
+  a. Same as Functional Component, it also require the createContext() method from the react module.
+  b. Most important thing is that, we need to create a interface for the createContext, so that if I want to access value/property, only those properties will be accessible which are passed via interface.
+  c. At the last, export the context.
+
+2. Create a Provider Function:
+  a. We are going to create a Functional Component, because once we create a context, it additionally provide me with a method called Provider.
+  b. Now first, I need to import the variable via which I create the context and pass the interface.
+  c. Secondly, in the provider function I will take children as a parameter to pass all the child component where I want to pass the data.
+  d. With the method like Provider from createContext, I can pass the value attribute/property and inside it, I can pass the object of data.
+  e. At the last, export the Provider Function.
+
+3. Utilize the consumer function:
+  a. In Class Based Component, their is nothing called hooks, we can't Utilize the useContext to access those value which is passed in Provider.
+  b. For that, their is a different method in class based component which is known as Context Consumer.
+  c. Firstly, we need to wrap the children component inside the Provider function in App file or Index File.
+  d. In which child I want to access those value/properties, i just need to import the create context variable from create context file which firstly created.
+  e. Then lastly, I need to wrap the child component code inside a tag of create context using the method consumer. Now I can able to access the properties which I pass via the Provider.
+
+Example:
+
+Open the contextapiinclass directory to understand the code more.

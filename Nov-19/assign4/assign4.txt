@@ -1,0 +1,23 @@
+Lifecycle Phase in Class Component:
+    1. Mounting
+    2. Updating
+    3. Unmounting
+    4. Error Handling
+
+Lifecycle Methods in Class Components
+    1. Mounting Phase
+        constructor: Initializes state and binds methods.
+        getDerivedStateFromProps: Syncs state with props before rendering.
+        render: Returns the JSX to be rendered.
+        componentDidMount: Runs after the component is mounted, ideal for data fetching.
+    2. Updating Phase
+        getDerivedStateFromProps: Syncs state with props when component updates.
+        shouldComponentUpdate: Determines if a re-render is needed.
+        render: Returns updated JSX.
+        getSnapshotBeforeUpdate: Captures data before DOM updates.
+        componentDidUpdate: Runs after updates, suitable for side-effects.
+    3. Unmounting Phase
+        componentWillUnmount: Runs before component removal, used for cleanup.
+    4. Error Handling Phase
+        static getDerivedStateFromError: Updates state when an error is caught.
+        componentDidCatch: Logs errors or displays fallback UI.
