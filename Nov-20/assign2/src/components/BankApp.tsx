@@ -45,7 +45,7 @@ const BankApp: React.FC = () => {
         <div className="mb-4">
           <label className="block font-medium text-gray-700 mb-2">Deposit Money:</label>
           <div className="flex space-x-2">
-            <input type="number" value={deposit} onChange={(e) => setDeposit(Number.parseInt(e.target.value))}
+            <input type="number" value={deposit === 0 ? "" : deposit} onChange={(e) => setDeposit(Number.parseInt(e.target.value))}
               className="border border-gray-300 rounded-md p-2 flex-1"
               placeholder="Enter deposit amount"
             />
@@ -61,7 +61,7 @@ const BankApp: React.FC = () => {
         <div className="mb-4">
           <label className="block font-medium text-gray-700 mb-2">Withdraw Money:</label>
           <div className="flex space-x-2">
-            <input type="number" value={withdraw} onChange={(e) => setWithdraw(Number.parseInt(e.target.value))}
+            <input type="number" value={withdraw === 0 ? "" : withdraw} onChange={(e) => setWithdraw(Number.parseInt(e.target.value))}
               className="border border-gray-300 rounded-md p-2 flex-1"
               placeholder="Enter withdrawal amount"
             />
