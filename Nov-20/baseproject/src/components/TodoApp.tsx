@@ -70,7 +70,12 @@ class TodoApp extends React.Component<{}, TodoState> {
         <ul>
           {this.state.todos.map((todo: Todo) => (
             <li>
-              {todo.text}{" "}
+             
+              <span
+              style={{"textDecoration":todo.completed ? "line-through" : "none", "color":todo.completed ? "Green" : "red"  }}> 
+                {todo.text}    
+              </span>
+              &nbsp;&nbsp;
               <button
                 onClick={() => {
                   this.handleRemove(todo.id);
@@ -78,7 +83,10 @@ class TodoApp extends React.Component<{}, TodoState> {
               >
                 Remove
               </button>
-              <button onClick={()=>this.handleToggle(todo.id)}>   {todo.completed ? "completed" : " not Yet" }</button>
+              &nbsp;&nbsp;
+              <button onClick={()=>this.handleToggle(todo.id)}> Mark As  {todo.completed ? "Not Done" : "Done" }</button>
+            
+        
             </li>
           ))}
         </ul>
