@@ -1,26 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+/*
+React Query is a library for managing server state in React applications. It simplifies data fetching, caching, 
+synchronization, and updating UI with server data. React Query helps in reducing boilerplate code and provides 
+features like:
 
-function App() {
+Automatic caching and background fetching.
+Automatic updates when data changes on the server.
+Powerful dev tools for debugging server state.
+Optimistic updates for a better user experience.
+
+
+*/
+
+import React from 'react';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import FetchData from './components/FetchData';
+
+const queryClient = new QueryClient();
+
+const App: React.FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <QueryClientProvider client={queryClient}>
+      <div className="min-h-screen bg-gray-100 p-4">
+        <h1 className="text-center text-2xl font-bold">React Query Example</h1>
+        <FetchData />
+      </div>
+    </QueryClientProvider>
   );
-}
+};
 
 export default App;
