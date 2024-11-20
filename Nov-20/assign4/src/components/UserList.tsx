@@ -1,3 +1,7 @@
+// globally install
+// terminal - global
+// database temp - from client
+
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
