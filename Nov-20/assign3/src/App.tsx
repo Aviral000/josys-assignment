@@ -11,7 +11,7 @@ Optimistic updates for a better user experience.
 */
 
 import React from 'react';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'; // context and provider
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'; // similar to context and provider
 import FetchData from './components/FetchData';
 
 const queryClient = new QueryClient();
