@@ -1,16 +1,16 @@
 import React, { useReducer, useState } from "react";
 
-interface BankState {
+interface Bank {
   money: number;
 }
 
-type BankAction =
+type ActionType =
   | { type: "deposit"; addSum: number }
   | { type: "withdraw"; minSum: number };
 
-const initialState: BankState = { money: 0 };
+const initialState: Bank = { money : 0 };
 
-const reducer = (state: BankState, action: BankAction): BankState => {
+const reducer = (state: Bank, action: ActionType): Bank => {
   switch (action.type) {
     case "deposit":
       return { money: state.money + action.addSum };
