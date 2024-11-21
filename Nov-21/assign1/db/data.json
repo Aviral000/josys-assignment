@@ -1,0 +1,58 @@
+{
+  "customer": [
+    {
+      "customerId": 1,
+      "name": "Aviral Malik",
+      "city": "Delhi",
+      "contactNumber": "9528410080",
+      "year": "2002",
+      "totalPurchasesPerYear": 3400,
+      "photo": "https://i.pinimg.com/originals/b6/1c/48/b61c481670f57dc40f3d9cd1b1bd523a.jpg"
+    },
+    {
+      "customerId": 2,
+      "name": "Aviral Malik",
+      "city": "Delhi",
+      "contactNumber": "9528410055",
+      "year": "2002",
+      "totalPurchasesPerYear": 3400,
+      "photo": "https://i.pinimg.com/originals/b6/1c/48/b61c481670f57dc40f3d9cd1b1bd523a.jpg"
+    },
+    {
+      "customerId": 4,
+      "name": "Aviral Malik",
+      "city": "Delhi",
+      "contactNumber": "9528410033",
+      "year": "2002",
+      "totalPurchasesPerYear": 3400,
+      "photo": "https://i.pinimg.com/originals/b6/1c/48/b61c481670f57dc40f3d9cd1b1bd523a.jpg"
+    },
+    {
+      "customerId": 5,
+      "name": "Aviral Malik",
+      "city": "Delhi",
+      "contactNumber": "9528410045",
+      "year": "2002",
+      "totalPurchasesPerYear": 34000,
+      "photo": "https://i.pinimg.com/originals/b6/1c/48/b61c481670f57dc40f3d9cd1b1bd523a.jpg"
+    },
+    {
+      "customerId": 6,
+      "name": "Aviral Malik",
+      "city": "Delhi",
+      "contactNumber": "9528410234",
+      "year": "2002",
+      "totalPurchasesPerYear": 340000,
+      "photo": "https://i.pinimg.com/originals/b6/1c/48/b61c481670f57dc40f3d9cd1b1bd523a.jpg"
+    },
+    {
+      "customerId": 3,
+      "name": "Sonu Nigam",
+      "city": "Delhi",
+      "contactNumber": "9528410222",
+      "year": "2002",
+      "totalPurchasesPerYear": 340003,
+      "photo": "https://i.pinimg.com/originals/b6/1c/48/b61c481670f57dc40f3d9cd1b1bd523a.jpg"
+    }
+  ]
+}
