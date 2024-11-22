@@ -1,0 +1,248 @@
+{
+  "users": [
+    {
+      "name": "Alice Johnson",
+      "email": "alice@gmail.com",
+      "password": "Alice@123",
+      "role": "Admin",
+      "customerId": 1
+    },
+    {
+      "name": "Bob Smith",
+      "email": "bob@gmail.com",
+      "password": "Bob@123",
+      "role": "User",
+      "customerId": 2
+    },
+    {
+      "name": "Carol Brown",
+      "email": "carol@gmail.com",
+      "password": "Carol@123",
+      "role": "User",
+      "customerId": 3
+    },
+    {
+      "name": "David Wilson",
+      "email": "david@gmail.com",
+      "password": "David@123",
+      "role": "Admin",
+      "customerId": 4
+    },
+    {
+      "name": "Eve Adams",
+      "email": "eve@gmail.com",
+      "password": "Eve@123",
+      "role": "User",
+      "customerId": 5
+    },
+    {
+      "name": "Frank Taylor",
+      "email": "frank@gmail.com",
+      "password": "Frank@123",
+      "role": "User",
+      "customerId": 6
+    },
+    {
+      "name": "Grace Lee",
+      "email": "grace@gmail.com",
+      "password": "Grace@123",
+      "role": "Admin",
+      "customerId": 7
+    },
+    {
+      "name": "Hank White",
+      "email": "hank@gmail.com",
+      "password": "Hank@123",
+      "role": "User",
+      "customerId": 8
+    },
+    {
+      "name": "Ivy Hall",
+      "email": "ivy@gmail.com",
+      "password": "Ivy@123",
+      "role": "Admin",
+      "customerId": 9
+    },
+    {
+      "name": "Jack King",
+      "email": "jack@gmail.com",
+      "password": "Jack@123",
+      "role": "User",
+      "customerId": 10
+    }
+  ],
+  "departments": [
+    {
+      "id": 1,
+      "name": "Sales",
+      "description": "Handles sales operations",
+      "employeeCount": 3,
+      "location": "New York",
+      "manager": "Alice Johnson",
+      "budget": 100000
+    },
+    {
+      "id": 2,
+      "name": "Marketing",
+      "description": "Manages marketing campaigns",
+      "employeeCount": 2,
+      "location": "Chicago",
+      "manager": "Bob Smith",
+      "budget": 80000
+    },
+    {
+      "id": 3,
+      "name": "HR",
+      "description": "Responsible for hiring",
+      "employeeCount": 2,
+      "location": "San Francisco",
+      "manager": "Carol Brown",
+      "budget": 60000
+    },
+    {
+      "id": 4,
+      "name": "IT",
+      "description": "Maintains IT infrastructure",
+      "employeeCount": 4,
+      "location": "Seattle",
+      "manager": "David Wilson",
+      "budget": 120000
+    },
+    {
+      "id": 5,
+      "name": "Finance",
+      "description": "Manages company finances",
+      "employeeCount": 3,
+      "location": "Boston",
+      "manager": "Eve Adams",
+      "budget": 150000
+    },
+    {
+      "id": 6,
+      "name": "Operations",
+      "description": "Oversees daily operations",
+      "employeeCount": 5,
+      "location": "Los Angeles",
+      "manager": "Frank Taylor",
+      "budget": 90000
+    },
+    {
+      "id": 7,
+      "name": "Customer Support",
+      "description": "Provides customer support",
+      "employeeCount": 3,
+      "location": "Houston",
+      "manager": "Grace Lee",
+      "budget": 50000
+    },
+    {
+      "id": 8,
+      "name": "Legal",
+      "description": "Handles legal matters",
+      "employeeCount": 2,
+      "location": "Atlanta",
+      "manager": "Hank White",
+      "budget": 70000
+    },
+    {
+      "id": 9,
+      "name": "R&D",
+      "description": "Research and development",
+      "employeeCount": 4,
+      "location": "Denver",
+      "manager": "Ivy Hall",
+      "budget": 200000
+    },
+    {
+      "id": 10,
+      "name": "Admin",
+      "description": "Administrative tasks",
+      "employeeCount": 2,
+      "location": "Dallas",
+      "manager": "Jack King",
+      "budget": 40000
+    }
+  ],
+  "employees": [
+    {
+      "id": 1,
+      "name": "John Doe",
+      "department": "Sales",
+      "position": "Sales Executive",
+      "salary": 50000,
+      "image": "https://assets.entrepreneur.com/content/3x2/2000/20150820205507-single-man-outdoors-happy-bliss.jpeg"
+    },
+    {
+      "id": 2,
+      "name": "Jane Smith",
+      "department": "Marketing",
+      "position": "Marketing Specialist",
+      "salary": 45000,
+      "image": "https://images.askmen.com/1080x540/news/dating/being-single-and-happy-1108415-TwoByOne.jpg"
+    },
+    {
+      "id": 3,
+      "name": "Emma Brown",
+      "department": "HR",
+      "position": "HR Manager",
+      "salary": 55000,
+      "image": "https://dq1eylutsoz4u.cloudfront.net/2018/02/09150602/living-the-single-life.jpg"
+    },
+    {
+      "id": 4,
+      "name": "Liam Wilson",
+      "department": "IT",
+      "position": "Software Engineer",
+      "salary": 70000,
+      "image": "https://dm0qx8t0i9gc9.cloudfront.net/thumbnails/video/D8qa-2E/walking-man-facing-camera-slow-motion-male-person-single-alone-activity_sp-abpz_i_thumbnail-1080_01.png"
+    },
+    {
+      "id": 5,
+      "name": "Olivia Taylor",
+      "department": "Finance",
+      "position": "Financial Analyst",
+      "salary": 60000,
+      "image": "https://cdn2.psychologytoday.com/assets/styles/manual_crop_1_91_1_1528x800/public/field_blog_entry_images/shutterstock_193527755.jpg?itok=uS1VIBoY"
+    },
+    {
+      "id": 6,
+      "name": "Noah Davis",
+      "department": "Operations",
+      "position": "Operations Manager",
+      "salary": 65000,
+      "image": "https://i0.wp.com/afamuche.com/wp-content/uploads/2020/10/10-Simple-Ways-To-Reinvent-Yourself-And-Improve-Your-Life.jpg?resize=1100%2C733&ssl=1"
+    },
+    {
+      "id": 7,
+      "name": "Sophia Lee",
+      "department": "Customer Support",
+      "position": "Support Lead",
+      "salary": 40000,
+      "image": "https://hackspirit.com/wp-content/uploads/2017/08/woman-768x644.jpg"
+    },
+    {
+      "id": 8,
+      "name": "Mason White",
+      "department": "Legal",
+      "position": "Legal Advisor",
+      "salary": 50000,
+      "image": "https://th.bing.com/th/id/OIP.31nnC4Hfz8qh01NP3RsBEwHaE8?rs=1&pid=ImgDetMain"
+    },
+    {
+      "id": 9,
+      "name": "Isabella Green",
+      "department": "R&D",
+      "position": "Research Scientist",
+      "salary": 75000,
+      "image": "https://media.northwesternmutual.com/images/1100x618/0793-financial-planning-for-single-people-1157933487.jpg"
+    },
+    {
+      "id": 10,
+      "name": "James Hall",
+      "department": "Admin",
+      "position": "Administrative Assistant",
+      "salary": 35000,
+      "image": "https://www.francelawfirm.com/wp-content/uploads/2015/09/Fotolia_69907519_Subscription_Monthly_XXL-copy.jpg"
+    }
+  ]
+}
