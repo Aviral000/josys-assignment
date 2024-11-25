@@ -1,0 +1,68 @@
+Unit Testing in Software Development
+
+What is Unit Testing?
+Unit testing is a software testing method where individual components or "units" of code are tested in isolation to verify they work as intended. A unit is typically a function, method, or class.
+
+Why Write Unit Tests?
+1. Early Bug Detection
+   - Catch issues early in development
+   - Reduce debugging time and costs
+   - Prevent bugs from reaching production
+
+2. Code Quality
+   - Forces better code organization
+   - Improves code maintainability
+   - Acts as documentation for developers
+
+3. Confidence in Changes
+   - Safely refactor code
+   - Verify new features don't break existing functionality
+   - Enable continuous integration
+
+Who Writes Unit Tests?
+- Developers: Primary responsibility lies with the developer writing the code
+- Test Engineers: May help establish testing patterns and frameworks
+- QA Team: May review and supplement unit tests
+- Team Lead: Often sets testing standards and coverage requirements
+
+Popular JavaScript Testing Libraries
+
+Jest
+describe('Calculator', () => {
+  test('adds 1 + 2 to equal 3', () => {
+    expect(add(1, 2)).toBe(3);
+  });
+});
+
+Mocha with Chai
+// Example Mocha/Chai test
+describe('Calculator', () => {
+  it('should add two numbers correctly', () => {
+    expect(add(1, 2)).to.equal(3);
+  });
+});
+
+Best Practices
+1. Follow AAA Pattern
+   - Arrange: Set up test data
+   - Act: Execute the code being tested
+   - Assert: Verify the results
+
+2. Keep Tests
+   - Simple
+   - Independent
+   - Readable
+   - Fast
+
+Code Coverage
+- Aim for 70-80% coverage
+- Focus on critical business logic
+- Don't chase 100% blindly
+
+Common Testing Libraries & Tools
+- Jest (Meta's Testing Framework)
+- Mocha (Flexible testing framework)
+- Jasmine (Behavior-Driven Development)
+- Vitest (Vue.js ecosystem)
+- Testing Library (Component testing)
+- Cypress (E2E + Component testing)
