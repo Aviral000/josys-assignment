@@ -4,13 +4,13 @@
       "id": 1,
       "name": "Aviral Malik",
       "email": "avi@gmail.com",
-      "dept": "IT",
+      "dept": "Industry",
       "role": "Software engineer - 2"
     },
     {
       "name": "Mukesh",
       "email": "mukesh@gmail.com",
-      "dept": "Management",
+      "dept": "Bank",
       "role": "Accountant",
       "id": 2
     },
