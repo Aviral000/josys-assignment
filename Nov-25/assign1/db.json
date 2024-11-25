@@ -1,0 +1,25 @@
+{
+  "employers": [
+    {
+      "id": 1,
+      "name": "Aviral Malik",
+      "email": "avi@gmail.com",
+      "dept": "IT",
+      "role": "Software engineer - 2"
+    },
+    {
+      "name": "Mukesh",
+      "email": "mukesh@gmail.com",
+      "dept": "Management",
+      "role": "Accountant",
+      "id": 2
+    },
+    {
+      "name": "Amit",
+      "email": "amit@gmail.com",
+      "dept": "Finance",
+      "role": "Manager",
+      "id": 3
+    }
+  ]
+}
