@@ -30,7 +30,7 @@ const VehicleRegistrationForm:React.FC = () => {
           <div className="max-w-md mx-auto">
             <div className="divide-y divide-gray-200">
               <div className="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
-                <h2 className="text-2xl font-bold mb-8 text-center text-gray-800">
+                <h2 data-testid="heading" className="text-2xl font-bold mb-8 text-center text-gray-800">
                   Vehicle Registration Form
                 </h2>
 
@@ -39,6 +39,7 @@ const VehicleRegistrationForm:React.FC = () => {
                     <label className="text-gray-600 mb-2 block">Owner Name</label>
                     <input
                       type="text"
+                      placeholder='Name'
                       {...register('ownerName', { required: 'Owner name is required' })}
                       className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-blue-500 
                         ${errors.ownerName ? 'border-red-500' : 'border-gray-300'}`}
@@ -52,6 +53,7 @@ const VehicleRegistrationForm:React.FC = () => {
                     <label className="text-gray-600 mb-2 block">Contact Number</label>
                     <input
                       type="text"
+                      placeholder='contact-number'
                       {...register('contactNumber', {
                         required: 'Contact number is required',
                         pattern: {
