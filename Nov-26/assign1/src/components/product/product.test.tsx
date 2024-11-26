@@ -44,7 +44,7 @@ describe("ProductForm component test cases", () => {
     fireEvent.change(qtyInput, { target: { value: "2" } });
     fireEvent.click(button);
 
-    const totalAmount = screen.getByText(/total amount: 1000/i);
+    const totalAmount = screen.getByText(/total amount: 1000/i); // check the whole webpage
     expect(totalAmount).toBeInTheDocument();
   });
 

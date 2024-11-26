@@ -9,6 +9,7 @@ describe('LoginForm Component', () => {
     expect(screen.getByPlaceholderText('Password')).toBeInTheDocument();
     expect(screen.getByRole('button')).toBeInTheDocument();
     expect(screen.getByText(/sign up/i)).toBeInTheDocument();
+    expect(screen.getByRole('link')).toBeInTheDocument();
   });
 
   test('displays error if User ID is not supplied', () => {
